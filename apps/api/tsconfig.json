@@ -1,0 +1,12 @@
+{
+  "extends": "@financeiro/config/tsconfig",
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "CommonJS",
+    "target": "ES2021",
+    "types": ["node"],
+    "baseUrl": "./src"
+  },
+  "include": ["src", "test", "prisma"],
+  "exclude": ["node_modules"]
+}

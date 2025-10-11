@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tenant {
+  id          String   @id @default(uuid())
+  name        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  users       User[]
+  accounts    Account[]
+  categories  Category[]
+  transactions Transaction[]
+  invoices    Invoice[]
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String
+  role      String
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Account {
+  id        String   @id @default(uuid())
+  tenantId  String
+  name      String
+  type      String
+  balance   Float    @default(0)
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+  transactions Transaction[]
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  tenantId  String
+  name      String
+  type      String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+  transactions Transaction[]
+}
+
+model Transaction {
+  id          String   @id @default(uuid())
+  tenantId    String
+  accountId   String
+  categoryId  String
+  amount      Float
+  description String
+  occurredAt  DateTime
+  status      String
+  tenant      Tenant   @relation(fields: [tenantId], references: [id])
+  account     Account  @relation(fields: [accountId], references: [id])
+  category    Category @relation(fields: [categoryId], references: [id])
+}
+
+model Invoice {
+  id           String   @id @default(uuid())
+  tenantId     String
+  status       String
+  dueDate      DateTime
+  total        Float
+  paymentMethod String
+  tenant       Tenant   @relation(fields: [tenantId], references: [id])
+}
