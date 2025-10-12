@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "Financeiro Mobile",
+    "slug": "financeiro-mobile",
+    "scheme": "financeiro",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "jsEngine": "hermes",
+    "assetBundlePatterns": ["**/*"],
+    "updates": {
+      "enabled": true,
+      "fallbackToCacheTimeout": 0
+    },
+    "plugins": ["expo-updates", "expo-notifications"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1d4ed8"
+      }
+    }
+  }
+}
