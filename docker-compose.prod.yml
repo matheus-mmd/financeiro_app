@@ -1,0 +1,34 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: financeiro
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/financeiro
+    ports:
+      - '3333:3333'
+    depends_on:
+      - postgres
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - '3000:3000'
+    depends_on:
+      - api
+volumes:
+  pgdata:
