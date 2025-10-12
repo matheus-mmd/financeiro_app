@@ -13,7 +13,7 @@
     "generate": "next export"
   },
   "dependencies": {
-    "@auth/core": "^0.12.1",
+    "@auth/core": "^0.41.0",
     "@financeiro/shared": "workspace:*",
     "@financeiro/ui": "workspace:*",
     "@tanstack/react-query": "^5.25.0",
