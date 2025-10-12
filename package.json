@@ -23,5 +23,10 @@
     "husky": "^9.0.10",
     "lint-staged": "^15.2.2",
     "turbo": "^1.12.5"
+  },
+  "pnpm": {
+    "overrides": {
+      "bcrypt": "npm:bcryptjs@^2.4.3"
+    }
   }
 }
