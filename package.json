@@ -26,7 +26,8 @@
   },
   "pnpm": {
     "overrides": {
-      "bcrypt": "npm:bcryptjs@^2.4.3"
+      "bcrypt": "npm:bcryptjs@^2.4.3",
+      "react-test-renderer": "18.2.0"
     }
   }
 }
