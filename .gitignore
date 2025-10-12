@@ -1,0 +1,17 @@
+node_modules
+.pnpm-store
+.pnpm-debug.log
+.DS_Store
+.env
+.env.local
+.env.development
+.env.production
+apps/**/.expo
+apps/**/dist
+apps/**/.next
+apps/**/build
+apps/api/prisma/generated
+coverage
+.expo
+.husky/_
+tmp
