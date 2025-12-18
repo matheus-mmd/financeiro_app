@@ -1,8 +1,19 @@
 import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node';
-import { ConsoleSpanExporter, SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base';
+import { BatchSpanProcessor, ConsoleSpanExporter } from '@opentelemetry/sdk-trace-base';
 
 const provider = new NodeTracerProvider();
-provider.addSpanProcessor(new SimpleSpanProcessor(new ConsoleSpanExporter()));
+
+if (process.env.ENABLE_CONSOLE_SPANS === 'true') {
+  provider.addSpanProcessor(
+    new BatchSpanProcessor(new ConsoleSpanExporter(), {
+      maxQueueSize: 2048,
+      maxExportBatchSize: 256,
+      scheduledDelayMillis: 500,
+      exportTimeoutMillis: 10000
+    })
+  );
+}
+
 provider.register();
 
 export const tracer = provider.getTracer('financeiro-api');

@@ -1,11 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { ThemeProvider } from '@financeiro/ui';
 import { ReactNode } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { DevtoolsProvider } from '../providers/devtools-provider';
-
-const queryClient = new QueryClient();
+import { AppProviders } from '../providers/app-providers';
 
 export const metadata: Metadata = {
   title: 'Financeiro SaaS',
@@ -16,11 +12,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <body className="min-h-screen">
-        <ThemeProvider>
-          <QueryClientProvider client={queryClient}>
-            <DevtoolsProvider>{children}</DevtoolsProvider>
-          </QueryClientProvider>
-        </ThemeProvider>
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );
